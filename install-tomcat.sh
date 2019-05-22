@@ -51,7 +51,7 @@ EOF
 export CATALINA_HOME=$CATALINA_HOME
 export CATALINA_BASE=\$(cd "\$(dirname "\$0")";cd ..;pwd)
 export CATALINA_OPTS="\$CATALINA_OPTS \\
-                      -Dapp.name=${APP_NAME}_ \\
+                      -Dapp.name=$APP_NAME \\
                       -DlogHome=\$CATALINA_BASE/logs/ \\
                       -Dspring.config.location=\$CATALINA_BASE/conf/application.properties \\
                       -Dfile.encoding=UTF-8 -Djava.awt.headless=true \\
@@ -62,7 +62,7 @@ checkStart(){
     return \$?
 }
 
-PID=\`ps -ef|grep app.name=${APP_NAME}_ |grep -v grep|awk '{print \$2}'\`
+PID=\`ps -ef|grep "app.name=$APP_NAME\\ " |grep -v grep|awk '{print \$2}'\`
 if [ -n "\$PID" ]; then
     echo "$APP_NAME is running! Start aborted."
     exit 0
@@ -109,7 +109,7 @@ EOF
 export CATALINA_HOME=$CATALINA_HOME
 export CATALINA_BASE=\$(cd "\$(dirname "\$0")";cd ..;pwd)
 
-PID=\`ps -ef|grep app.name=${APP_NAME}_ |grep -v grep|awk '{print \$2}'\`
+PID=\`ps -ef|grep "app.name=$APP_NAME\\ " |grep -v grep|awk '{print \$2}'\`
 
 if [ -z "\$PID" ]; then
     echo "$APP_NAME isn't running! Stop aborted."
@@ -124,7 +124,7 @@ for i in {0..60};
 do
   tput rc
   tput ed
-  PID=\`ps -ef|grep app.name=${APP_NAME}_ |grep -v grep|awk '{print \$2}'\`
+  PID=\`ps -ef|grep "app.name=$APP_NAME\\ " |grep -v grep|awk '{print \$2}'\`
   if [ -z "\$PID" ]; then
     echo -n "$APP_NAME stoped in \$i s."
     echo ""
