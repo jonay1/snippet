@@ -1,18 +1,17 @@
 #!/bin/bash
-#在当前目录
+##################################创建tomcat实例##################################
+##用法1: sh install-tomcat.sh <app-name> <http port> <shutdown port> <ajp port> ##
+##用法2: sh install-tomcat.sh                                                   ##
+#################################################################################
 BASE_PATH=$(cd "$(dirname "$0")";pwd)
 err() {
   echo $*
   exit 1
 }
 
-
-#[ -z $JAVA_HOME ] && read -p "JAVA_HOME路径:" JAVA_HOME
-#[ -z $JAVA_HOME ] && err '缺少环境变量JAVA_HOME'
 [ -z "$TOMCAT_HOME" ] && read -p "TOMCAT目录:" TOMCAT_HOME
 [ ! -d "$TOMCAT_HOME" ] && err 'TOMCAT目录不正确'
 CATALINA_HOME=$TOMCAT_HOME
-#[ $# -gt 3 ] || err "usage: sh install-tomcat.sh <app-name> <http port> <shutdown port> <ajp port>"
 
 APP_NAME=$1
 HTTP_PORT=$2
